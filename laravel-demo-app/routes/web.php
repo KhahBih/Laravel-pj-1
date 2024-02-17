@@ -13,10 +13,40 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/home', function () {
+    $blogs = [
+        [
+            'title' => 'Title one',
+            'body' => 'This is the body text',
+            'status' => 1
+        ],
+        [
+            'title' => 'Title two',
+            'body' => 'This is the body text',
+            'status' => 1
+        ],
+        [
+            'title' => 'Title three',
+            'body' => 'This is the body text',
+            'status' => 0
+        ],
+        [
+            'title' => 'Title four',
+            'body' => 'This is the body text',
+            'status' => 1
+        ]
+    ];
+    return view('home', compact('blogs'));
 });
 
-Route::get('about', function(){
-    return "<h1>About</h1>";
+Route::get('/about', function(){
+    return view('about');
+});
+
+Route::get('/contact', function(){
+    return "<h1>contact</h1>";
+})-> name('aaa');
+
+Route::get('/contact/{id}', function($id){
+    return $id;
 });
