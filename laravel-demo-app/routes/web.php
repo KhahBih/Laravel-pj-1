@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,35 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/home', function () {
-    $blogs = [
-        [
-            'title' => 'Title one',
-            'body' => 'This is the body text',
-            'status' => 1
-        ],
-        [
-            'title' => 'Title two',
-            'body' => 'This is the body text',
-            'status' => 1
-        ],
-        [
-            'title' => 'Title three',
-            'body' => 'This is the body text',
-            'status' => 0
-        ],
-        [
-            'title' => 'Title four',
-            'body' => 'This is the body text',
-            'status' => 1
-        ]
-    ];
-    return view('home', compact('blogs'));
-});
-
-Route::get('/about', function(){
-    return view('about');
-});
+Route::get('/home', HomeController::class);
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'handleLogin'])->name('login.submit');
+Route::get('/about', [AboutController::class, 'index']);
 
 Route::get('/contact', function(){
     return "<h1>contact</h1>";
@@ -50,3 +28,7 @@ Route::get('/contact', function(){
 Route::get('/contact/{id}', function($id){
     return $id;
 });
+
+
+
+Route::resource('blog', BlogController::class);
