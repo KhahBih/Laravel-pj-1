@@ -1,15 +1,16 @@
 @extends('layouts.master');
 @section('content')
 <main role="main" class="container">
-    <h1 class="mt-5 text-danger">Home</h1>
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cum pariatur ratione quaerat vero a,
-    ullam reiciendis earum distinctio nihil exercitationem quidem neque odit aliquid quasi esse, repudiandae, adipisci non placeat.
-    <div class="row mt-5">
-        @foreach($posts as $post)
-            <li>id: {{ $post->id }}</li>
-            <li>Title: {{ $post->title }}</li>
-            {{-- <li>Description: {{ $post->description }}</li> --}}
-        @endforeach
-    </div>
+    <img src="{{asset('/storage/app/public/')}}" alt="">
+    <form action="{{route('upload-file')}}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="form-group">
+            <label for="">Upload</label>
+            <input type="file" name="image"class="form-control">
+        </div>
+        <div class="form-group">
+           <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+    </form>
 </main>
 @endsection

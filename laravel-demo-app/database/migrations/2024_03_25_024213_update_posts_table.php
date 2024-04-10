@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
-            $table->id();
-            $table->name();
-            $table->timestamps();
+        Schema::table('posts', function (Blueprint $table) {
+            $table->renameColumn('published_date', 'publish_date');
         });
     }
 
@@ -23,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::table('posts', function (Blueprint $table) {
+            $table->renameColumn('published_date', 'publish_date');
+        });
     }
 };
